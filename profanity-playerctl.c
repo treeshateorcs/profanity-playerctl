@@ -8,6 +8,7 @@
 void *cb(void *unused) {
   (void)unused;
   gchar res[1024];
+  gchar last_res[1024];
   while (1) {
     PlayerctlPlayer *plctl = playerctl_player_new(NULL, NULL);
     gchar *artist = playerctl_player_get_artist(plctl, NULL);
@@ -17,6 +18,7 @@ void *cb(void *unused) {
     if (strcmp(last_res, res) != 0) {
       prof_send_stanza(res);
     }
+    strcpy(last_res, res);
     struct timespec ts;
     ts.tv_sec = 1;
     ts.tv_nsec = 0;
