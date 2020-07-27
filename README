@@ -1,4 +1,4 @@
-this is profanity plugin that shows what you are listening to right now. 
+this is a profanity plugin that shows what you are listening to right now via d-bus
 
 requirements:
 profanity
