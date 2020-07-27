@@ -6,6 +6,7 @@
 #include <unistd.h>
 
 void *cb(void *unused) {
+  (void)unused;
   gchar res[1024];
   while (1) {
     PlayerctlPlayer *plctl = playerctl_player_new(NULL, NULL);
@@ -13,9 +14,11 @@ void *cb(void *unused) {
     gchar *title = playerctl_player_get_title(plctl, NULL);
     sprintf(res, "<presence><status>%s - %s</status></presence>", artist,
             title);
-    prof_send_stanza(res);
+    if (strcmp(last_res, res) != 0) {
+      prof_send_stanza(res);
+    }
     struct timespec ts;
-    ts.tv_sec = 5;
+    ts.tv_sec = 1;
     ts.tv_nsec = 0;
     nanosleep(&ts, NULL);
   }
@@ -23,7 +26,8 @@ void *cb(void *unused) {
 
 void prof_on_connect(const char *const account_name,
                      const char *const fulljid) {
-  PlayerctlPlayer *plctl = playerctl_player_new(NULL, NULL);
+  (void)account_name;
+  (void)fulljid;
   pthread_t thread;
   if (pthread_create(&thread, NULL, cb, NULL)) {
     fprintf(stderr, "Error creating thread\n");
