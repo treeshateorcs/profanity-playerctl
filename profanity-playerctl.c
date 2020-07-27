@@ -13,7 +13,7 @@ void *cb(void *unused) {
     PlayerctlPlayer *plctl = playerctl_player_new(NULL, NULL);
     gchar *artist = playerctl_player_get_artist(plctl, NULL);
     gchar *title = playerctl_player_get_title(plctl, NULL);
-    sprintf(res, "<presence><status>%s - %s</status></presence>", artist,
+    sprintf(res, "<presence><status>🎶%s - %s</status></presence>", artist,
             title);
     if (strcmp(last_res, res) != 0) {
       prof_send_stanza(res);
