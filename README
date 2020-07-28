@@ -6,3 +6,13 @@ playerctl
 
 TODO:
 switch to dbus, instead of playerctl
+
+installation:
+make && make install 
+
+(no need for root)
+
+in profanity do
+/plugin load profanity-playerctl.so
+
+(only needed once)
