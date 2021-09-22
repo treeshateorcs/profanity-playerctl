@@ -6,7 +6,7 @@
 #include <unistd.h>
 
 void *cb(void *unused) {
-  (void)unused;
+  (void)unused; // cast to void to supress an unused variable warning
   gchar res[1024];
   gchar last_res[1024];
   while (1) {
